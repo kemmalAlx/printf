@@ -23,35 +23,24 @@ int _printf(const char *format, ...)
 		{
 			i++;
 			if (format[i] == 'c')
-			{
-				print_c(ap);
-				ret++;
-			}
+				print_c(ap, ret);
 			else if (format[i] == 's')
-			{
 				print_s(ap, &ret);
-			}
 			else if (format[i] == '%')
-			{
-				_putchar('%');
-				ret++;
-			}
+				_putchar('%', ret);
 			else if (format[i] == 'd' || format[i] == 'i')
-			{
 				print_d(ap, &ret);
-			}
 			else
 			{
-				_putchar('%');
-				_putchar(format[i]);
+				_putchar('%', ret);
+				_putchar(format[i], ret);
 			}
 			i++;
 			continue;
 		}
 		else
-			_putchar(format[i]);
+			_putchar(format[i], ret);
 		i++;
-		ret++;
 	}
 	va_end(ap);
 	return (ret);

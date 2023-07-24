@@ -4,10 +4,12 @@
  * _putchar - function that write a character
  *
  * @c: the character will be printed
+ * @ret: length of character printed
 */
-void _putchar(char c)
+void _putchar(char c, int *ret)
 {
 	write(1, &c, 1);
+	(*ret)++;
 }
 
 /**
@@ -22,8 +24,7 @@ void _putstr(char *str, int *ret)
 
 	while (str[i])
 	{
-		_putchar(str[i]);
+		_putchar(str[i], ret);
 		i++;
-		(*ret)++;
 	}
 }
