@@ -29,7 +29,10 @@ void handl_S(va_list ap, int *ret)
 	char *str;
 
 	str = va_arg(ap, char *);
-	_putstr(str, ret);
+	if (!str)
+		_putstr("(null)", ret);
+	else
+		_putstr(str, ret);
 }
 
 int _printf(const char *format, ...)
