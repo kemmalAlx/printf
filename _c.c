@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * print_c - a function that handle conversion specifiers
  * of character %c

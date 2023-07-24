@@ -11,8 +11,8 @@ int main(void)
 {
 	int len1 = 0, len2 = 0;
 
-	len1  = _printf("|%%%c|\n", 'A');
-	len2 = printf("|%%%c|\n", 'A');
+	len1  = _printf("%c", 0);
+	len2 = printf("%c", 0);
 
 	printf("len1: |%d|\n", len1);
 	printf("len2: |%d|\n", len2);
