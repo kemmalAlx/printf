@@ -28,13 +28,8 @@ void handl_S(va_list ap, int *ret)
 	char *str;
 
 	str = va_arg(ap, char *);
-	if (str == NULL)
-		_putstr("(null)");
-	else
-	{
-		_putstr(str);
-		(*ret)++;
-	}
+	_putstr(str);
+	(*ret)++;
 }
 
 int _printf(const char *format, ...)
