@@ -5,6 +5,16 @@ void _putchar(char c)
 	write(1, &c, 1);
 }
 
+void _putstr(char *str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		_putchar(str[i]);
+		i++;
+	}
+}
 void handl_C(va_list ap)
 {
 	char c;
@@ -16,13 +26,13 @@ void handl_C(va_list ap)
 void handl_S(va_list ap, int *ret)
 {
 	char *str;
-	int i = 0;
 
 	str = va_arg(ap, char *);
-	while (str[i])
+	if (!str)
+		_putstr("(null)");
+	else
 	{
-		_putchar(str[i]);
-		i++;
+		_putstr(str);
 		(*ret)++;
 	}
 }
