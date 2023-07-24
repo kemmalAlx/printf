@@ -5,7 +5,7 @@ void _putchar(char c)
 	write(1, &c, 1);
 }
 
-void _putstr(char *str)
+void _putstr(char *str, int *ret)
 {
 	int i = 0;
 
@@ -13,6 +13,7 @@ void _putstr(char *str)
 	{
 		_putchar(str[i]);
 		i++;
+		(*ret)++;
 	}
 }
 void handl_C(va_list ap)
@@ -28,8 +29,10 @@ void handl_S(va_list ap, int *ret)
 	char *str;
 
 	str = va_arg(ap, char *);
-	_putstr(str);
-	(*ret)++;
+	if (!str)
+		_putstr("(null)", ret);
+	else
+		_putstr(str, ret);
 }
 
 int _printf(const char *format, ...)
