@@ -1,10 +1,21 @@
 #include "main.h"
 
+/**
+ * _putchar - function that write a character
+ *
+ * @c: the character will be printed
+*/
 void _putchar(char c)
 {
 	write(1, &c, 1);
 }
 
+/**
+ * _putstr - a function that write a string
+ *
+ * @str: the string will be printed
+ * @ret: length of character printed
+*/
 void _putstr(char *str, int *ret)
 {
 	int i = 0;
@@ -16,25 +27,16 @@ void _putstr(char *str, int *ret)
 		(*ret)++;
 	}
 }
-void handl_C(va_list ap)
-{
-	char c;
 
-	c = va_arg(ap, int);
-	_putchar(c);
-}
-
-void handl_S(va_list ap, int *ret)
-{
-	char *str;
-
-	str = va_arg(ap, char *);
-	if (!str)
-		_putstr("(null)", ret);
-	else
-		_putstr(str, ret);
-}
-
+/**
+ * _printf - a function that produces output
+ *				according to a format.
+ *
+ * @format: A string of character representing
+ *          the argument types
+ *
+ * Return: return length of character printed
+*/
 int _printf(const char *format, ...)
 {
 	va_list ap;
@@ -43,17 +45,17 @@ int _printf(const char *format, ...)
 	va_start(ap, format);
 	while (format[i])
 	{
-		if (format[i] == '%') 
+		if (format[i] == '%')
 		{
 			i++;
 			if (format[i] == 'c')
 			{
-				handl_C(ap);
+				print_c(ap);
 				ret++;
 			}
 			else if (format[i] == 's')
 			{
-				handl_S(ap, &ret);
+				print_s(ap, &ret);
 			}
 			else if (format[i] == '%')
 			{
