@@ -14,12 +14,10 @@ void print_number(int n, int *ret)
 	{
 		_putchar('-', ret);
 		nbr = -nbr;
-		(*ret)++;
 	}
 	if (nbr >= 10)
 		print_number(nbr / 10, ret);
 	_putchar((nbr % 10) + '0', ret);
-	(*ret)++;
 }
 
 /**
