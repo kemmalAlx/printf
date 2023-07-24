@@ -44,9 +44,12 @@ int _printf(const char *format, ...)
 			i++;
 			continue;
 		}
-		_putchar(format[i]);
+		else
+		{
+			_putchar(format[i]);
+			ret++;
+		}
 		i++;
-		ret++;
 	}
 	va_end(ap);
 	return (ret);
