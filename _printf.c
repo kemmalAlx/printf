@@ -21,21 +21,20 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			i++;
-			if (format[i] == 'c')
+			if (format[i + 1] == 'c')
 				print_c(ap, &ret);
-			else if (format[i] == 's')
+			else if (format[i + 1] == 's')
 				print_s(ap, &ret);
-			else if (format[i] == '%')
+			else if (format[i + 1] == '%')
 				_putchar('%', &ret);
-			else if (format[i] == 'd' || format[i] == 'i')
+			else if (format[i + 1] == 'd' || format[i + 1] == 'i')
 				print_d(ap, &ret);
 			else
 			{
 				_putchar('%', &ret);
-				_putchar(format[i], &ret);
+				_putchar(format[i + 1], &ret);
 			}
-			i++;
+			i += 2;
 			continue;
 		}
 		else
