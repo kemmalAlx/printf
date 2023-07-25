@@ -2,6 +2,6 @@
 
 void print_autre(char c, int *ret)
 {
-	_putchar('%', &ret);
-	_putchar(c, &ret);
+	_putchar('%', ret);
+	_putchar(c, ret);
 }
