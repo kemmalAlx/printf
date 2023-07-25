@@ -18,6 +18,7 @@ int _printf(const char *format, ...)
 		{'s', print_s},
 		{'d', print_d},
 		{'i', print_d},
+		{0, NULL},
 	};
 
 	va_start(ap, format);
@@ -32,13 +33,16 @@ int _printf(const char *format, ...)
 			while (j < 4)
 			{
 				if (format[i] == print[j].symbol)
-					print[j].print_symb(ap, &ret);
-				else if (j == 4)
 				{
-					_putchar('%', &ret);
-					_putchar(format[i], &ret);
+					print[j].print_symb(ap, &ret);
+					break;
 				}
 				j++;
+			}
+			if (!print[j].symbol)
+			{
+				_putchar('%', &ret);
+				_putchar(format[i], &ret);
 			}
 			i++;
 			continue;
