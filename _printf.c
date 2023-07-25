@@ -1,5 +1,21 @@
 #include "main.h"
 
+void helper(va_list ap, char format, int *ret)
+{
+	if (format == 'c')
+		print_c(ap, ret);
+	else if (format == 's')
+		print_s(ap, ret);
+	else if (format == '%')
+		_putchar('%', ret);
+	else if (format == 'd' || format == 'i')
+		print_d(ap, ret);
+	else if (format == 'b')
+		print_b(ap, ret);
+	else
+		print_autre(format, ret);
+}
+
 /**
  * _printf - a function that produces output
  *				according to a format.
@@ -8,7 +24,7 @@
  *          the argument types
  *
  * Return: return length of character printed
-*/
+ */
 int _printf(const char *format, ...)
 {
 	va_list ap;
@@ -21,18 +37,7 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if (format[i + 1] == 'c')
-				print_c(ap, &ret);
-			else if (format[i + 1] == 's')
-				print_s(ap, &ret);
-			else if (format[i + 1] == '%')
-				_putchar('%', &ret);
-			else if (format[i + 1] == 'd' || format[i + 1] == 'i')
-				print_d(ap, &ret);
-			else if (format[i + 1] == 'b')
-				print_b(ap, &ret);
-			else
-				print_autre(format[i + 1], &ret);
+			helper(ap, format[i + 1], &ret);
 			i += 2;
 			continue;
 		}
