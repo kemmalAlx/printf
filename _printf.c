@@ -12,7 +12,13 @@
 int _printf(const char *format, ...)
 {
 	va_list ap;
-	int i = 0, ret = 0;
+	int i = 0, ret = 0, j;
+	t_printf print[] = {
+		{'c', print_c},
+		{'s', print_s},
+		{'d', print_d},
+		{'i', print_d},
+	};
 
 	va_start(ap, format);
 	if (!format)
@@ -22,18 +28,17 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			if (format[i] == 'c')
-				print_c(ap, &ret);
-			else if (format[i] == 's')
-				print_s(ap, &ret);
-			else if (format[i] == '%')
-				_putchar('%', &ret);
-			else if (format[i] == 'd' || format[i] == 'i')
-				print_d(ap, &ret);
-			else
+			j = 0;
+			while (j < 4)
 			{
-				_putchar('%', &ret);
-				_putchar(format[i], &ret);
+				if (format[i] == print[j].symbol)
+					print[j].print_symb(ap, &ret);
+				else if (j == 4)
+				{
+					_putchar('%', &ret);
+					_putchar(format[i], &ret);
+				}
+				j++;
 			}
 			i++;
 			continue;

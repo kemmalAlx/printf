@@ -4,6 +4,12 @@
 #include <unistd.h>
 #include <stdarg.h>
 
+typedef struct s_printf
+{
+	char symbol;
+	void (*print_symb)(va_list ap, int *ret);
+}	t_printf;
+
 void _putchar(char c, int *ret);
 void _putstr(char *str, int *ret);
 void print_c(va_list ap, int *ret);
