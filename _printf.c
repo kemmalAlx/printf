@@ -28,21 +28,25 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			i++;
 			j = 0;
 			while (j < 4)
 			{
-				if (format[i] == print[j].symbol)
+				if (format[i + 1] == print[j].symbol)
 				{
 					print[j].print_symb(ap, &ret);
 					break;
 				}
 				j++;
 			}
-			if (!print[j].symbol && format[i] != ' ')
+			if (!print[j].symbol && format[i + 1] != ' ')
 			{
-				_putchar('%', &ret);
-				_putchar(format[i], &ret);
+				if (format[i + 1] != '\0')
+				{
+					_putchar('%', &ret);
+					_putchar(format[i], &ret);
+				}
+				else
+					return (-1);
 			}
 			i++;
 			continue;
