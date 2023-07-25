@@ -29,6 +29,8 @@ int _printf(const char *format, ...)
 				_putchar('%', &ret);
 			else if (format[i + 1] == 'd' || format[i + 1] == 'i')
 				print_d(ap, &ret);
+			else if (format[i + 1] == 'b')
+				print_b(ap, &ret);
 			else
 			{
 				_putchar('%', &ret);
