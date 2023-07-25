@@ -39,7 +39,7 @@ int _printf(const char *format, ...)
 				}
 				j++;
 			}
-			if (!print[j].symbol)
+			if (!print[j].symbol && format[i] != ' ')
 			{
 				_putchar('%', &ret);
 				_putchar(format[i], &ret);
