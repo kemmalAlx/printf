@@ -1,66 +1,50 @@
 #include "main.h"
 
-void print_buffer(char buffer[], int *buff_ind);
-
-/**
- * _printf - Printf function
- * @format: format.
- * Return: Printed chars.
- */
-int _printf(const char *format, ...)
+void helper(va_list ap, char format, int *ret)
 {
-	int i, printed = 0, printed_chars = 0;
-	int flags, width, precision, size, buff_ind = 0;
-	va_list list;
-	char buffer[BUFF_SIZE];
-
-	if (format == NULL)
-		return (-1);
-
-	va_start(list, format);
-
-	for (i = 0; format && format[i] != '\0'; i++)
-	{
-		if (format[i] != '%')
-		{
-			buffer[buff_ind++] = format[i];
-			if (buff_ind == BUFF_SIZE)
-				print_buffer(buffer, &buff_ind);
-			/* write(1, &format[i], 1);*/
-			printed_chars++;
-		}
-		else
-		{
-			print_buffer(buffer, &buff_ind);
-			flags = get_flags(format, &i);
-			width = get_width(format, &i, list);
-			precision = get_precision(format, &i, list);
-			size = get_size(format, &i);
-			++i;
-			printed = handle_print(format, &i, list, buffer,
-				flags, width, precision, size);
-			if (printed == -1)
-				return (-1);
-			printed_chars += printed;
-		}
-	}
-
-	print_buffer(buffer, &buff_ind);
-
-	va_end(list);
-
-	return (printed_chars);
+	if (format == 'c')
+		print_c(ap, ret);
+	else if (format == 's')
+		print_s(ap, ret);
+	else if (format == '%')
+		_putchar('%', ret);
+	else if (format == 'd' || format == 'i')
+		print_d(ap, ret);
+	else if (format == 'b')
+		print_b(ap, ret);
+	else
+		print_autre(format, ret);
 }
 
 /**
- * print_buffer - Prints the contents of the buffer if it exist
- * @buffer: Array of chars
- * @buff_ind: Index at which to add next char, represents the length.
+ * _printf - a function that produces output
+ *				according to a format.
+ *
+ * @format: A string of character representing
+ *          the argument types
+ *
+ * Return: return length of character printed
  */
-void print_buffer(char buffer[], int *buff_ind)
+int _printf(const char *format, ...)
 {
-	if (*buff_ind > 0)
-		write(1, &buffer[0], *buff_ind);
+	va_list ap;
+	int i = 0, ret = 0;
 
-	*buff_ind = 0;
+	va_start(ap, format);
+	if (!format)
+		return (-1);
+	while (format[i])
+	{
+		if (format[i] == '%')
+		{
+			helper(ap, format[i + 1], &ret);
+			i += 2;
+			continue;
+		}
+		else
+			_putchar(format[i], &ret);
+		i++;
+	}
+	va_end(ap);
+	return (ret);
 }
