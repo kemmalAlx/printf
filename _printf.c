@@ -32,10 +32,7 @@ int _printf(const char *format, ...)
 			else if (format[i + 1] == 'b')
 				print_b(ap, &ret);
 			else
-			{
-				_putchar('%', &ret);
-				_putchar(format[i + 1], &ret);
-			}
+				print_autre(format[i + 1], &ret);
 			i += 2;
 			continue;
 		}

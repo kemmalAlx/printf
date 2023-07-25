@@ -23,7 +23,8 @@ void print_c(va_list ap, int *ret);
 void print_s(va_list ap, int *ret);
 void print_d(va_list ap, int *ret);
 void print_number(int n, int *ret);
-void	print_b(va_list ap, int *ret);
+void print_b(va_list ap, int *ret);
+void print_autre(char c, int *ret);
 
 int _printf(const char *format, ...);
 
