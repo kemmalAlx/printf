@@ -19,7 +19,7 @@ void helper(va_list ap, char format, int *ret)
 		print_d(ap, ret);
 	else if (format == 'b')
 		print_b(ap, ret);
-	else
+	else if (format)
 		print_autre(format, ret);
 }
 
@@ -44,8 +44,11 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			helper(ap, format[i + 1], &ret);
-			i += 2;
+			i++;
+			if (!format[i])
+				break;
+			helper(ap, format[i], &ret);
+			i++;
 			continue;
 		}
 		else
