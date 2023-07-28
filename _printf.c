@@ -1,5 +1,12 @@
 #include "main.h"
 
+/**
+ * helper - a function that handle onversions specifiers
+ *
+ * @ap: list of arguments
+ * @format: the string
+ * @ret: length of character printed
+*/
 void helper(va_list ap, char format, int *ret)
 {
 	if (format == 'c')
